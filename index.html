@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 3</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.47/vue.global.prod.js"></script>
+
+    <link rel="stylesheet" href="./CSS/style.css">
+
+</head>
+<body>
+    <div id="app">
+        <h1>Lista de Tareas</h1>
+        <input type="text" v-model="nuevaTarea" placeholder="Agregar nueva tarea">
+        <button @click="agregarTarea">Agregar</button>
+        <ul>
+            <li v-for="(tarea, index) in tareas" :key="index">
+                <input type="checkbox" v-model="tarea.completed">
+                <span :class="{ completed: tarea.completed }">{{ tarea.texto }}</span>
+
+                <button @click="eliminarTarea(index)">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./JS/Vue.js"></script>
+</body>
+</html>
