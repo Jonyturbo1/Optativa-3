@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreador de Habitos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.47/vue.global.prod.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/4.1.6/vue-router.global.min.js"></script>
+    <link rel="stylesheet" href="./CSS/style1.css">
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+
+    <!-- Templates para componentes -->
+    <script type="text/x-template" id="main-layout">
+        <div class="main-layout">
+            <habit-summary :habitos="habitos"></habit-summary>
+            <habit-form @agregar-habito="agregarHabito"></habit-form>
+            <habit-list 
+                :habitos="habitos" 
+                @eliminar-habito="eliminarHabito"
+                @ver-detalle="verDetalle">
+            </habit-list>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="habit-detail-page">
+        <div class="habit-detail">
+            <h2>Detalles del Habito</h2>
+            <div v-if="habito">
+                <h3>{{ habito.texto }}</h3>
+                <p>Creado el: {{ formatFecha(habito.fechaCreacion) }}</p>
+                <p>Completado: {{ habito.vecesCompletado }} veces</p>
+                <button @click="marcarCompletado" class="btn-complete">Marcar como completado hoy</button>
+                <button @click="volver" class="btn-back">Volver a la lista</button>
+            </div>
+            <div v-else>
+                <p>Habito no encontrado</p>
+                <button @click="volver" class="btn-back">Volver a la lista</button>
+            </div>
+        </div>
+    </script>
+
+    <script src="./JS/components/HabitList.js"></script>
+    <script src="./JS/components/HabitForm.js"></script>
+    <script src="./JS/components/HabitSummary.js"></script>
+    <script src="./JS/Vue1.js"></script>
+</body>
+</html>
